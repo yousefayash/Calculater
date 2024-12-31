@@ -1,0 +1,96 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>calculater</title>
+</head>
+<body>
+    <div id="calculater_container">
+
+
+    <div id="display_area">  </div>
+
+
+        <div class="container_row">
+            <button>c</button>
+            <button>(</button>
+            <button>)</button>
+            <button>/</button>
+        </div>
+        <div class="container_row">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>*</button>
+        </div>
+        <div class="container_row">
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>-</button>
+        </div>
+        <div class="container_row">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>+</button>
+        </div>
+        <div class="container_row">
+            <button>del</button>
+            <button>0</button>
+            <button>.</button>
+            <button>=</button>
+        </div>
+
+
+    </div>
+
+    <script>
+        const CalculaterContainer = document.getElementById("calculater_container");
+const displayArea = document.getElementById("display_area");
+
+CalculaterContainer.addEventListener("click" , (e)=>{
+    if(e.target.nodeName === "BUTTON"){
+        switch(e.target.textContent){
+            case "c":
+                    clear();
+            break;
+            case "del":
+                     deletOneValue()
+            break;
+            case "=":
+                evaluate();
+            break;
+         default:
+          addToDisplayArea(e.target.textContent);  
+        }
+    }
+})
+
+function clear (){
+    displayArea.textContent = "";
+}
+
+function addToDisplayArea (value){
+  displayArea.textContent = displayArea.textContent + value;
+}
+
+function deletOneValue(){
+    let currentContent=displayArea.textContent ;
+    displayArea.textContent = currentContent.substring(0, currentContent.length - 1)
+}
+function evaluate() {
+    try {
+      let calculation = eval(displayArea.textContent);
+      displayArea.textContent = calculation;
+    } catch (error) {
+      displayArea.textContent = "Syntax error";
+      console.error(error);
+    }
+  }
+    </script>
+
+</body>
+</html> 
